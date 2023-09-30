@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Ninjas CSV-Upload</title>
+    <style>
+        /* Reset some default styles to ensure consistency across browsers */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Set a modern font family */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #FF3CAC, #784BA0, #2B86C5, #00A8C5, #00C3A0, #FFFF00, #FF3CAC, #784BA0, #2B86C5);
+            background-size: 200% 200%; /* Adjust size for animation */
+            animation: gradientAnimation 10s ease infinite; /* Animated gradient */
+            color: #fff; /* Text color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Viewport height for full screen */
+            margin: 0;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .file-section {
+            background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent background */
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            transition: transform 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .file-section:hover {
+            transform: translateY(-5px); /* Lift the card on hover */
+        }
+
+        .custom-file-input {
+            background-color: #3333cc;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .custom-file-input:hover {
+            background-color: #4444cc;
+        }
+
+        /* Style for the file input */
+        .file-input {
+            display: none;
+        }
+
+        #file-name {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Adjust text color for better visibility */
+        h2 {
+            color: #333;
+            margin-bottom: 10px; /* Add margin to separate from the button */
+        }
+
+        /* Style for the buttons */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .custom-file-input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-input + label {
+            background-color: #3333cc;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            font-size: 16px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .custom-file-input[type="file"]:hover + label {
+            background-color: #4444cc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Coding Ninjas CSV-Upload</h1>
+    
+    <div class="file-section">
+        <div style="background: #3333cc; border-radius: 50%; width: 100px; height: 100px; display: flex; justify-content: center; align-items: center; margin-bottom: 20px;">
+            <!-- open folder emoji html code  -->
+            <span style="font-size: 50px; color: #fff;">&#128194;</span> 
+        </div>
+        <!-- Make "Choose a File" text visible by adjusting text color -->
+        <h2>Choose a File</h2>
+        <form action="/importUser" method="post" enctype="multipart/form-data">
+            <input type="file" id="file-upload" class="file-input custom-file-input" name="userFile">
+            <label for="file-upload" class="custom-file-input">Select File</label>
+            <!-- Display the selected file name here -->
+            <p id="file-name"></p>
+            <div class="button-container">
+                <input type="submit" value="Upload" class="custom-file-input">
+            </div>
+        </form>
+    </div>
+
+    <!-- JavaScript to display selected file name -->
+    <script>
+        const fileInput = document.getElementById("file-upload");
+        const fileNameDisplay = document.getElementById("file-name");
+
+        fileInput.addEventListener("change", () => {
+            const selectedFile = fileInput.files[0];
+            if (selectedFile) {
+                fileNameDisplay.textContent = `Selected File: ${selectedFile.name}`;
+            } else {
+                fileNameDisplay.textContent = "No file selected";
+            }
+        });
+    </script>
+</body>
+</html>
